@@ -78,18 +78,18 @@ local altkey       = "Mod1"
 local terminal     = "xterm"
 local editor       = os.getenv("EDITOR") or "nano"
 local gui_editor   = "gvim"
-local browser      = "google-chrome"
+local browser      = "firefox"
 local guieditor    = "atom"
 
 awful.util.terminal = terminal
-awful.util.tagnames = { "Main", "Code", "Res", "Code", "Res", "Term", }
+awful.util.tagnames = { "1", "2", "3", "4", "5" }
 awful.layout.layouts = {
     awful.layout.suit.floating,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
+    --awful.layout.suit.fair,
     --awful.layout.suit.fair.horizontal,
     --awful.layout.suit.spiral,
     --awful.layout.suit.spiral.dwindle,
@@ -464,7 +464,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "c", function () awful.spawn("xsel | xsel -i -b") end,
               {description = "copy terminal to gtk", group = "hotkeys"}),
     -- Copy clipboard to primary (gtk to terminals)
-    awful.key({ modkey }, "v", function () awful.spawn("xsel -b") end,
+    awful.key({ modkey }, "v", function () awful.spawn("xsel -b | xsel") end,
               {description = "copy gtk to terminal", group = "hotkeys"}),
 
     -- User programs
