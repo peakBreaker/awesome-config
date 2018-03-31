@@ -57,6 +57,14 @@ end
 run_once({ "unclutter -root" }) -- entries must be comma-separated
 -- }}}
 
+-- {{{ Spotify
+function sendToSpotify(command)
+  return function ()
+    awful.util.spawn_with_shell("dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player." .. command)
+  end
+end
+-- }}}
+
 -- {{{ Variable definitions
 
 local themes = {
@@ -222,6 +230,21 @@ root.buttons(awful.util.table.join(
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
+  
+    -- {{{ Spotify 
+    awful.key({ modkey, altkey }, "p", sendToSpotify("PlayPause"),
+              {description = "Play/pause", group = "Spotify"}), --  XF86AudioPlay
+    awful.key({ modkey, altkey }, "n", sendToSpotify("Next"),
+              {description = "Next song", group = "Spotify"}), -- XF86AudioNext
+    awful.key({ modkey, altkey }, "l", sendToSpotify("Previous"),
+              {description = "Previous song", group = "Spotify"}), -- XF86AudioPrev
+    -- }}}
+  
+   -- {{{ Lock the screen
+    awful.key({ altkey }, "l", function () awful.spawn("xscreensaver-command -lock") end,
+              {description = "Lock the screen", group = "hotkeys"}),
+   -- }}}
+  
     -- Take a screenshot
     -- https://github.com/lcpz/dots/blob/master/bin/screenshot
     awful.key({ altkey }, "p", function() os.execute("screenshot") end,
