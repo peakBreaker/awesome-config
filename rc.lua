@@ -84,7 +84,7 @@ local chosen_theme = themes[5]
 local modkey       = "Mod4"
 local altkey       = "Mod1"
 local terminal     = "xterm"
-local editor       = os.getenv("EDITOR") or "nano"
+local editor       = os.getenv("EDITOR") or "vim"
 local gui_editor   = "gvim"
 local browser      = "google-chrome"
 local guieditor    = "atom"
@@ -230,8 +230,8 @@ root.buttons(awful.util.table.join(
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
-  
-    -- {{{ Spotify 
+
+    -- {{{ Spotify
     awful.key({ modkey, altkey }, "p", sendToSpotify("PlayPause"),
               {description = "Play/pause", group = "Spotify"}), --  XF86AudioPlay
     awful.key({ modkey, altkey }, "n", sendToSpotify("Next"),
@@ -239,12 +239,12 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, altkey }, "l", sendToSpotify("Previous"),
               {description = "Previous song", group = "Spotify"}), -- XF86AudioPrev
     -- }}}
-  
+
    -- {{{ Lock the screen
-    awful.key({ altkey }, "l", function () awful.spawn("xscreensaver-command -lock") end,
+    awful.key({ "Control", modkey, altkey }, "l", function () awful.spawn("xscreensaver-command -lock") end,
               {description = "Lock the screen", group = "hotkeys"}),
    -- }}}
-  
+
     -- Take a screenshot
     -- https://github.com/lcpz/dots/blob/master/bin/screenshot
     awful.key({ altkey }, "p", function() os.execute("screenshot") end,
